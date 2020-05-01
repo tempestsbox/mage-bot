@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 module.exports = {
-	name: ['restart'],
+	aliases: ['restart'],
 	description: 'Restarts the bot',
   required_permissions: ['MANAGE_GUILD'],
 	execute(message, args) {

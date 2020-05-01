@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 module.exports = {
-	name: ['ping'],
+	aliases: ['ping'],
 	description: 'Pingaz!',
 	execute(message, args) {
 		message.channel.send('Pong!');

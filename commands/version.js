@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 const config = require('../config.json');
 
 module.exports = {
-	name: ['version', 'ver', 'v'],
+	aliases: ['version', 'ver', 'v'],
 	description: 'Find the latest version on GitHub of TTB',
 	async execute(message, args) {
 		const repo = config.github;

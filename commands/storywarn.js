@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 module.exports = {
-  name: ['storywarn', 'sw'],
+  aliases: ['storywarn', 'sw'],
   description: 'BANNED',
   required_permissions: ['MANAGE_MESSAGES'],
   async execute(message, args) {

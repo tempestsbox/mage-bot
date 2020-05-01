@@ -11,7 +11,7 @@ const commandFiles = fs
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
-  command.name.forEach(element => {
+  command.aliases.forEach(element => {
     client.commands.set(element, command);
   });
 }

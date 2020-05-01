@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 const config = require('../config.json');
 
 module.exports = {
-	name: ['info', 'information', 'inf', 'i'],
+	aliases: ['info', 'information', 'inf', 'i'],
 	description: 'Sends a DM to you with info about TTB',
 	async execute(message, args) {
 		const repo = config.github;

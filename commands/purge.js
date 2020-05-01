@@ -3,7 +3,7 @@
 const Discord = require('discord.js');
 
 module.exports = {
-	name: ['purge'],
+	aliases: ['purge'],
 	description: 'Purges up to 99 messages.',
   required_permissions: ['MANAGE_MESSAGES'],
 	execute(message, args) {
