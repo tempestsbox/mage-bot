@@ -1,0 +1,16 @@
+{
+  "name": "ttb_bot",
+  "version": "1.0.0",
+  "description": "Casts a spell of awesomeness on your server!",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node bot.js"
+  },
+  "author": "Andante",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.1.1",
+    "express": "^4.17.1"
+  }
+}

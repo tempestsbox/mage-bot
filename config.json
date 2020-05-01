@@ -1,0 +1,16 @@
+{
+    "prefix": "ttb!",
+    "bot_channel": "",
+    "invite": "6TFaAuW",
+
+    "postMessagesToLog": false,
+
+    "description": "The Tempest's Box adds countless features that add to the game, providing you with many new items, blocks, entities, and more!",
+    "activity": "TTB 0.8-old",
+
+    "site": "https://tempestsbox.github.io",
+    "github": "tempestsbox/ttb",
+    "curseforge": "minecraft/customization/ttb",
+    "youtube": "channel/UCGsgiPCLZ0YJioZIBalclIA",
+    "reddit": "r/thetempestsbox"
+}
