@@ -1,7 +1,8 @@
 {
     "prefix": "ttb!",
-    "bot_channel": "",
     "invite": "6TFaAuW",
+    "bot_channel": "705804969915318343",
+    "suggestions_channel": "705882295961387160",
 
     "postMessagesToLog": false,
 
