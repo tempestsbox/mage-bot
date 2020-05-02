@@ -5,7 +5,7 @@ const config = require('../config.json');
 
 module.exports = {
 	aliases: ['info', 'information', 'inf', 'i'],
-	description: 'Sends a DM to you with info about TTB',
+	description: 'Replies with info about TTB, along with downloads!',
 	async execute(message, args) {
 		const repo = config.github;
 		let archive;

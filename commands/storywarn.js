@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 module.exports = {
   aliases: ['storywarn', 'sw'],
-  description: 'BANNED',
-  required_permissions: ['MANAGE_MESSAGES'],
+  description: 'You boke de wules',
+  usage: '<user id | user embed>',
+  required_permissions: ['ADMINISTRATOR'],
   async execute(message, args) {
     const userarg = args[0];
 

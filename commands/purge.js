@@ -4,7 +4,8 @@ const Discord = require('discord.js');
 
 module.exports = {
 	aliases: ['purge'],
-	description: 'Purges up to 99 messages.',
+  description: 'Purges up to 99 messages.',
+  usage: '<int>',
   required_permissions: ['MANAGE_MESSAGES'],
 	execute(message, args) {
 		const amount = parseInt(args[0]) + 1;

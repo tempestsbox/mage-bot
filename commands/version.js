@@ -4,7 +4,7 @@ const config = require('../config.json');
 
 module.exports = {
 	aliases: ['version', 'ver', 'v'],
-	description: 'Find the latest version on GitHub of TTB',
+	description: 'Fetches the latest version of TTB from GitHub',
 	async execute(message, args) {
 		const repo = config.github;
 		let archive;
