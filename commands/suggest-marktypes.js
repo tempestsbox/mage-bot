@@ -4,7 +4,6 @@ const { suggestions_channel } = require("../config.json");
 module.exports = {
   aliases: ["suggest-marktypes"],
   description: "Lists the marktypes for suggestion marking",
-  required_permissions: ["MANAGE_CHANNELS"],
   async execute(message, args) {
     var toSend =
       "__Available Marktypes for <#" +

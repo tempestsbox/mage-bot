@@ -18,11 +18,14 @@ module.exports = {
     }
 
     const embed = new Discord.MessageEmbed()
-      .setDescription(args.join(" "))
-      .setColor("0x9b9b9b")
-      .setTimestamp()
-      .setFooter("Suggestion", message.author.avatarURL())
-      .setAuthor(message.author.username);
+        .setDescription(args.join(" "))
+        .setColor("0x9b9b9b")
+        .setTimestamp()
+        .setFooter(message.author.id + " • " + Math.floor((Math.random() * 2000000000) + 1))
+        .setAuthor(
+            message.author.username,
+            message.author.avatarURL()
+        );
 
     send();
 
