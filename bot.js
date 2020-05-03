@@ -2,22 +2,23 @@
 const fs = require("fs");
 const Discord = require("discord.js");
 
-const client = new Discord.Client();
+const client = new Discord.Client({
+  partials: ["MESSAGE", "CHANNEL", "REACTION"],
+});
 client.commands = new Discord.Collection();
+
+const config = require("./config.json");
+const package = require("./package.json");
 
 const commandFiles = fs
   .readdirSync("./commands")
   .filter((file) => file.endsWith(".js"));
-
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
   command.aliases.forEach((element) => {
     client.commands.set(element, command);
   });
 }
-
-const config = require("./config.json");
-const package = require("./package.json");
 
 var lastChainStoryMessage;
 
@@ -39,18 +40,14 @@ client.on("ready", () => {
 
   keepAlive();
 });
-
 function preload() {
-  client.user.setActivity('🟡').then(() => {
+  client.user.setActivity("🟡").then(() => {
     client.channels.fetch(config.bot_channel).then((channelFetch) => {
       Promise.all([channelFetch])
         .then((channels) => {
-          channels[0].setTopic("**Mage Bot**  🟡").then(() => {
-          });
+          channels[0].setTopic("**Mage Bot**  🟡").then(() => { });
         })
-        .catch((_error) =>
-          preload()
-        );
+        .catch((_error) => preload());
     });
   });
 }
@@ -61,12 +58,9 @@ function load() {
         channels[0].setTopic("**Mage Bot**  🟢");
         client.user.setActivity(config.activity);
       })
-      .catch((_error) =>
-        load()
-      );
+      .catch((_error) => load());
   });
 }
-
 function keepAlive() {
   const http = require("http");
   const express = require("express");
@@ -161,7 +155,6 @@ client.on("message", async (message) => {
     );
   }
 });
-
 function chainStory(message) {
   if (message.content.includes(" ")) {
     message.delete();
@@ -170,3 +163,66 @@ function chainStory(message) {
     );
   }
 }
+
+client.on("messageReactionAdd", async (reaction, user) => {
+  if (reaction.partial) {
+    try {
+      await reaction.fetch();
+    } catch (error) {
+      console.log(
+        "Something went wrong when fetching the message: ",
+        error.message
+      );
+      return;
+    }
+  }
+
+  const message = reaction.message;
+
+  if (!message.member.hasPermission("MANAGE_CHANNELS")) return;
+
+  if ((message.channel.id = config.suggestions_channel)) {
+    const markTypes = require("./suggestions_marktypes.json");
+
+    var found = false;
+    for (item of markTypes) {
+      for (acceptedEmoji of item[0]) {
+        if (reaction.emoji.name == acceptedEmoji) {
+          found = true;
+          break;
+        }
+      }
+
+      if (found == true) {
+        const markedAs =
+          "Marked as: `" + item[1] + "` by <@" + user.id + ">";
+        if (
+          !item[1] == "censored" ||
+          (message.embeds[0].description.startsWith("||") &&
+            message.embeds[0].description.endsWith("||"))
+        )
+          message.edit(markedAs, message.embeds[0].setColor(item[2]));
+        else
+          message.edit(
+            markedAs,
+            message.embeds[0]
+              .setColor(item[2])
+              .setDescription(
+                "||" + message.embeds[0].description + "||"
+              )
+          );
+
+        break;
+      }
+    }
+
+    if (reaction.emoji.name == "👍" || reaction.emoji.name == "👎") return;
+
+    message.reactions.cache
+      .get(reaction.emoji.name)
+      .remove()
+      .catch((error) =>
+        console.error("Failed to remove reactions: ", error)
+      );
+  }
+});

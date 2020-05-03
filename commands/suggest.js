@@ -22,7 +22,7 @@ module.exports = {
       .setColor("0x9b9b9b")
       .setTimestamp()
       .setFooter("Suggestion", message.author.avatarURL())
-      .setAuthor(message.author.tag);
+      .setAuthor(message.author.username);
 
     send();
 
