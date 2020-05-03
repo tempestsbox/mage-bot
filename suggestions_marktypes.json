@@ -3,7 +3,7 @@
   [["🟢"], "approved", "2ECC71"],
   [["🚫"], "invalid", "A569BD"],
   [["⚪"], "undecided", "CACFD2"],
-  [["🔸"], "split community", "FFA500"],
+  [["🔸"], "no consensus", "FFA500"],
   [["🔹"], "post-1.0", "3498DB"],
   [["❓", "❔"], "planned or already implemented", "F4D03F"],
   [["❗", "❕", "‼"], "censored", "641E16", true]
