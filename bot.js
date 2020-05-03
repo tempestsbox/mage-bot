@@ -25,6 +25,7 @@ var lastChainStoryMessage;
 console.log("Loading...");
 client.login(process.env.TOKEN);
 
+// event :: on load
 client.on("ready", () => {
   console.log(
     "[" +
@@ -74,6 +75,7 @@ function keepAlive() {
   }, 280000);
 }
 
+// event :: on message
 client.on("message", async (message) => {
   if (message.author.bot) {
     if (
@@ -164,6 +166,7 @@ function chainStory(message) {
   }
 }
 
+// event :: add reaction
 client.on("messageReactionAdd", async (reaction, user) => {
   if (reaction.partial) {
     try {
@@ -182,8 +185,32 @@ client.on("messageReactionAdd", async (reaction, user) => {
   if (!message.member.hasPermission("MANAGE_CHANNELS")) return;
 
   if ((message.channel.id = config.suggestions_channel)) {
-    const markTypes = require("./suggestions_marktypes.json");
+    if (!(reaction.emoji.name == "👍" || reaction.emoji.name == "👎"))
+      message.reactions.cache
+        .get(reaction.emoji.name)
+        .remove()
+        .catch((error) =>
+          console.error("Failed to remove reactions: ", error)
+        );
 
+    const previousEmbed = message.embeds[0];
+    const previousHasSpoiler =
+      previousEmbed.description.startsWith("||") &&
+      previousEmbed.description.endsWith("||");
+
+    // global remove spoiler
+    if (reaction.emoji.name == "▫️" && previousHasSpoiler) {
+      message.edit(
+        message.content,
+        previousEmbed.setDescription(
+          previousEmbed.description.slice(2, -2)
+        )
+      );
+      return;
+    }
+
+    // find other marktypes
+    const markTypes = require("./suggestions_marktypes.json");
     var found = false;
     for (item of markTypes) {
       for (acceptedEmoji of item[0]) {
@@ -194,35 +221,39 @@ client.on("messageReactionAdd", async (reaction, user) => {
       }
 
       if (found == true) {
-        const markedAs =
-          "Marked as: `" + item[1] + "` by <@" + user.id + ">";
-        if (
-          !item[1] == "censored" ||
-          (message.embeds[0].description.startsWith("||") &&
-            message.embeds[0].description.endsWith("||"))
-        )
-          message.edit(markedAs, message.embeds[0].setColor(item[2]));
-        else
-          message.edit(
-            markedAs,
-            message.embeds[0]
-              .setColor(item[2])
-              .setDescription(
-                "||" + message.embeds[0].description + "||"
-              )
+        var newEmbed = previousEmbed
+          .setColor(item[2])
+          .setFooter(
+            "Suggestion • Marked by " + user.username,
+            previousEmbed.footer.iconURL
           );
+
+        if (item[3] == true) {
+          if (!previousHasSpoiler)
+            newEmbed
+              .setFooter(
+                "Censored " + previousEmbed.footer.text,
+                previousEmbed.footer.iconURL
+              )
+              .setDescription(
+                "||" + previousEmbed.description + "||"
+              );
+        } else if (
+          previousHasSpoiler &&
+          previousEmbed.footer.text.startsWith("Censored")
+        ) {
+          newEmbed
+            .setDescription(previousEmbed.description.slice(2, -2))
+            .setFooter(
+              "Suggestion • Marked by " + user.username,
+              previousEmbed.footer.iconURL
+            );
+        }
+
+        message.edit("Marked as: `" + item[1] + "`", newEmbed);
 
         break;
       }
     }
-
-    if (reaction.emoji.name == "👍" || reaction.emoji.name == "👎") return;
-
-    message.reactions.cache
-      .get(reaction.emoji.name)
-      .remove()
-      .catch((error) =>
-        console.error("Failed to remove reactions: ", error)
-      );
   }
 });
