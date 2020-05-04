@@ -15,7 +15,7 @@ module.exports = {
                 "<@" + message.author.id + "> stopped the bot. Auto-restarting!"
             )
             .then(() => {
-                client.user.setActivity('🔴').then(() => {
+                client.user.setActivity("🔴").then(() => {
                     client.channels
                         .fetch(config.bot_channel)
                         .then((channelFetch) => {
