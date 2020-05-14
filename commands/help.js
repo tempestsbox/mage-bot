@@ -33,16 +33,25 @@ module.exports = {
                 .setColor("0x9b9b9b")
                 .setTimestamp()
                 .setFooter("Aliases: " + command.aliases);
+
             if (command.usage != undefined)
                 embed.setDescription(
                     embed.description +
-                    "\n\n*`" +
+                    "\n\nUsage: *`" +
                     prefix +
                     commandid +
                     " " +
                     command.usage +
                     "`*"
                 );
+            if (command.required_permissions != undefined)
+                embed.setDescription(
+                    embed.description +
+                    "\nRequired permissions: `" +
+                    command.required_permissions.toString() +
+                    "`"
+                );
+
             message.channel.send(embed);
         } else {
             var commands = "";
@@ -50,20 +59,27 @@ module.exports = {
             for (const file of commandFiles) {
                 const command = require(`./${file}`);
                 command.aliases.forEach((element) => {
-                    const modifiedElement = "`" + element + "`";
-
                     if (command.required_permissions != undefined) return;
 
+                    const modifiedElement = "`" + element + "`";
                     if (command.aliases[0] == element)
                         commands = commands + ", " + modifiedElement;
                     if (commands.startsWith(", ")) commands = modifiedElement;
                 });
 
                 command.aliases.forEach((element) => {
-                    const modifiedElement = "`" + element + "`";
-
                     if (command.required_permissions == undefined) return;
 
+                    var hasPermission = false;
+                    command.required_permissions.forEach(permission => {
+                        if (message.member.hasPermission(permission)) {
+                            hasPermission = true;
+                            return;
+                        }
+                    });
+                    if (!hasPermission) return;
+
+                    const modifiedElement = "`" + element + "`";
                     if (command.aliases[0] == element)
                         modCommands = modCommands + ", " + modifiedElement;
                     if (modCommands.startsWith(", "))
@@ -71,20 +87,16 @@ module.exports = {
                 });
             }
 
-            message.channel
-                .send(
-                    "Here's a list of all my commands:\n" +
-                    commands +
-                    "\n\nMy prefix is `" +
-                    prefix +
-                    "`"
-                )
-                .then(() => {
-                    if (message.member.hasPermission("MANAGE_MESSAGES"))
-                        message.channel.send(
-                            "‏‏‎ ‎\nMod commands:\n" + modCommands
-                        );
-                });
+            var toSend = "Here's a list of all my commands:\n" +
+                commands +
+                "\n\nMy prefix is `" +
+                prefix +
+                "`";
+            if (modCommands.length > 0)
+                toSend = toSend +
+                    "‏‏‎\n‎\nAvailable restricted commands for <@" + message.author.id + ">:\n" + modCommands;
+
+            message.channel.send(toSend);
         }
     },
 };

@@ -29,10 +29,10 @@ client.login(process.env.TOKEN);
 client.on("ready", () => {
     console.log(
         "[" +
-            client.user.username +
-            " " +
-            package.version +
-            "] Ready and raring!\n"
+        client.user.username +
+        " " +
+        package.version +
+        "] Ready and raring!\n"
     );
 
     preload();
@@ -46,7 +46,7 @@ function preload() {
         client.channels.fetch(config.bot_channel).then((channelFetch) => {
             Promise.all([channelFetch])
                 .then((channels) => {
-                    channels[0].setTopic("**Mage Bot**  🟡").then(() => {});
+                    channels[0].setTopic("**Mage Bot**  🟡");
                 })
                 .catch((_error) => preload());
         });
@@ -67,7 +67,7 @@ function keepAlive() {
     const express = require("express");
     const app = express();
     app.get("/", (request, response) => {
-        // process.exit();
+        process.exit();
     });
     app.listen(process.env.PORT);
     setInterval(() => {
@@ -102,11 +102,11 @@ client.on("message", async (message) => {
     if (!isCommand && config.postMessagesToLog)
         console.log(
             "[#" +
-                message.channel.name +
-                "] " +
-                message.author.tag +
-                ": " +
-                message.content
+            message.channel.name +
+            "] " +
+            message.author.tag +
+            ": " +
+            message.content
         );
 
     // if not command, return
@@ -117,19 +117,22 @@ client.on("message", async (message) => {
     if (client.commands.get(command).required_permissions != null) {
         var vreturn = false;
 
-        client.commands.get(command).required_permissions.forEach((item) => {
-            if (!message.member.hasPermission(item)) {
-                if (!vreturn)
-                    message.channel.send(
-                        "<@" +
+        client.commands
+            .get(command)
+            .required_permissions.forEach((permission) => {
+                if (!message.member.hasPermission(permission)) {
+                    if (!vreturn)
+                        message.channel.send(
+                            "<@" +
                             message.author.id +
                             ">, you do not have the required permissions! `" +
-                            client.commands.get(command).required_permissions +
+                            client.commands.get(command)
+                                .required_permissions +
                             "`"
-                    );
-                vreturn = true;
-            }
-        });
+                        );
+                    vreturn = true;
+                }
+            });
 
         if (vreturn) return;
     }
@@ -137,20 +140,20 @@ client.on("message", async (message) => {
     try {
         console.log(
             "---> " +
-                message.author.tag +
-                " ran command `" +
-                message.content +
-                "` in #" +
-                message.channel.name
+            message.author.tag +
+            " ran command `" +
+            message.content +
+            "` in #" +
+            message.channel.name
         );
         client.commands.get(command).execute(message, args);
     } catch (error) {
         console.error(error);
         message.reply(
             "there was an error trying to execute that command!" +
-                "\n`" +
-                error.message +
-                "`"
+            "\n`" +
+            error.message +
+            "`"
         );
     }
 });
@@ -261,26 +264,6 @@ client.on("messageReactionAdd", async (reaction, user) => {
                     );
                 }
 
-                // client.users
-                //     .fetch(previousEmbed.footer.text.slice(18, 0))
-                //     .then((suggestionerPromise) => {
-                //         Promise.all([suggestionerPromise]).then(
-                //             (suggestioner) => {
-                //                 console.log(suggestioner);
-                //                 message.edit(
-                //                     "Marked as: `" + markType[1] + "`",
-                //                     newEmbed
-                //                 );
-                //                 suggestioner.send(
-                //                     "<@" +
-                //                         user.tag +
-                //                         "> marked your suggestion as `" +
-                //                         markType[1]
-                //                 );
-                //             }
-                //         );
-                //     });
-
                 message.edit("Marked as: `" + markType[1] + "` by <@" + user.id + ">", newEmbed);
                 break;
             }
@@ -294,3 +277,7 @@ client.on("guildMemberAdd", (member) => {
         member.guild.roles.cache.find((role) => role.id === config.join_role)
     );
 });
+
+module.exports = {
+    client: client
+};

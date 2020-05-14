@@ -1,8 +1,11 @@
 /* eslint-disable no-unused-vars */
+var user = undefined;
+var messageGlobal;
+
 module.exports = {
     aliases: ["storywarn", "sw"],
     description: "You boke de wules",
-    usage: "<user id | user embed>",
+    usage: "<user id | user mention>",
     required_permissions: ["ADMINISTRATOR"],
     async execute(message, args) {
         const userarg = args[0];
@@ -14,39 +17,39 @@ module.exports = {
             return;
         }
 
-        if (
-            userarg.startsWith("<") &&
-            userarg.endsWith(">") &&
-            userarg.includes("!")
-        ) {
-            msg(userarg);
-            return;
-        }
+        user = await message.mentions.users.first();
 
-        var fetchedMember = await message.guild.members.fetch({
-            query: userarg,
-            limit: 1,
-        });
-        fetchedMember = await fetchedMember.map((user) => user.id);
-
-        if (userarg.length == 18)
-            fetchedMember = await message.guild.members.fetch(userarg);
-
-        if (fetchedMember.length == 0) {
+        messageGlobal = message;
+        if (user == undefined) {
+            if (userarg.length == 18)
+                message.guild.members
+                    .fetch({ id: userarg, limit: 1 })
+                    .then((fetchedMembers) => getUserId(fetchedMembers));
+            else
+                message.guild.members
+                    .fetch({ username: userarg, limit: 1 })
+                    .then((fetchedMembers) => getUserId(fetchedMembers));
+        } else {
             message.channel.send(
-                "<@" + message.author.id + "> - could not find user " + userarg
+                "Excuse me, one word per message <@" + user.id + ">!"
             );
-            return;
-        }
-
-        msg("<@" + fetchedMember + ">");
-
-        function msg(user) {
-            message.delete().then(() => {
-                message.channel.send(
-                    "Excuse me, one word per message " + user + "!"
-                );
-            });
         }
     },
 };
+
+function getUserId(fetchedMembers) {
+    Promise.all([fetchedMembers])
+        .then(async (fetchedMembersCollection) => {
+            const result = await fetchedMembersCollection[0].map(
+                (user) => user.id
+            );
+
+            messageGlobal.channel.send(
+                "Excuse me, one word per message <@" + result[0] + ">!"
+            );
+        })
+        .catch((e) => {
+            console.log(e);
+            user = undefined;
+        });
+}
