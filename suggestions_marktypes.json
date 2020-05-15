@@ -5,7 +5,7 @@
   [["⚪"], "undecided", "CACFD2"],
   [["🔸"], "no consensus", "FFA500"],
   [["🔹"], "post-1.0", "3498DB"],
-  [["🟥"], "not possible", "44AD6F"],
+  [["🟥"], "denied :: not possible", "C0392B"],
   [["❓", "❔"], "planned or already implemented", "F4D03F"],
   [["❗", "❕", "‼"], "censored", "641E16", true]
 ]
