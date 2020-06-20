@@ -1,11 +1,11 @@
 [
   [["🔴"], "denied", "C0392B"],
   [["🟢"], "approved", "2ECC71"],
+  [["🏅","🥇"], "implemented", "2ECC71"],
   [["🚫"], "invalid", "A569BD"],
-  [["⚪"], "undecided", "CACFD2"],
-  [["🔸"], "no consensus", "FFA500"],
-  [["🔹"], "post-1.0", "3498DB"],
+  [["⚪"], "no consensus / undecided", "CACFD2"],
+  [["🔹"], "post-update", "3498DB"],
   [["🟥"], "denied :: not possible", "C0392B"],
-  [["❓", "❔"], "planned or already implemented", "F4D03F"],
+  [["❓", "❔"], "planned or already implemented", "D35400"],
   [["❗", "❕", "‼"], "censored", "641E16", true]
 ]

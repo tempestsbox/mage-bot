@@ -7,9 +7,10 @@ module.exports = {
     description: "Fetches the latest version of TTB from GitHub",
     async execute(message, args) {
         const repo = config.github;
+        const prefix = "The latest version available from GitHub is "
         let archive;
 
-        const replyMessage = await message.channel.send("Loading...");
+        const replyMessage = await message.channel.send(prefix + "...");
 
         async function fetchGitHubArchive() {
             let response = await fetch(
@@ -31,10 +32,11 @@ module.exports = {
                 "<https://github.com/" + repo + "/archive/" + archive + ".zip>";
 
             replyMessage.edit(
-                "The latest version available on GitHub is: " +
-                    ("`" + archive + "`") +
-                    "\n          " +
-                    github
+                prefix +
+                    ("`" + archive + "`")
+                    // +
+                    // "\n          " +
+                    // github
             );
         });
     },

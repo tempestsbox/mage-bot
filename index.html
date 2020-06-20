@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167304117-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-167304117-1');
+    </script>
+
+    <title>About | The Tempest's Box</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="" />
+
+    <meta property="og:type" content="website" />
+
+    <link rel="stylesheet" href="/assets/css/global.css" />
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+</head>
+
+<body>
+    <header id="header" class="no-highlight">
+        <nav id="navbar">
+    
+        <a class="link item active" href="/"><i class="fas fa-user-circle"></i><span>About</span></a><br class="navbar-split">
+    
+        <a class="link item" href="/download"><i class="fa fa-download"></i><span>Download</span></a><br class="navbar-split">
+        <a class="link item" href="/wiki"><i class="fas fa-book"></i><span>Wiki</span></a><br class="navbar-split">
+    </nav>
+
+</header>
+
+    <div id="wrapper">
+        <div class="page-content">
+            <section class="intro no-highlight" id="title">
+    <img class="avatar ignore-defaults" src="/assets/logo.png" alt="logo.png">
+
+    <h2 ignore-underline title>The Tempest's Box</h2>
+</section>
+
+<section id="info">
+    <p>
+        The Tempest's Box adds countless features to vanilla Minecraft - without needing to install mods! - providing you with many new items, blocks, entities, structures, and more!
+
+    <br><br>
+
+        This project is an update of <a href="/faq#who-is-zoey">Zoey's</a> TTB for 1.16+. Similarly to the classic TTB,  we want as much involvement from the community as possible with the project!
+
+    </p>
+</section>
+
+        </div>
+    </div>
+
+    <footer class="no-highlight">
+        <section id="social-links">
+    <div class="btn-row social-links footer">
+        <a class="btn link social-title ignore-link-formatting" href="https://discord.gg/6TFaAuW" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i>Discord</a>
+
+        <a class="btn link social-title ignore-link-formatting" href="https://github.com/tempestsbox" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i>GitHub</a>
+
+        <a class="btn link social-title ignore-link-formatting" href="https://reddit.com/r/thetempestsbox" target="_blank" rel="noopener noreferrer"><i class="fab fa-reddit"></i>Reddit</a>
+
+        <a class="btn link social-title ignore-link-formatting" href="https://youtube.com/channel/UCGsgiPCLZ0YJioZIBalclIA" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i>YouTube</a>
+
+        <a class="btn link social-title ignore-link-formatting" href="https://patreon.com/thetempestsbox" target="_blank" rel="noopener noreferrer"><i class="fab fa-patreon"></i>Patreon</a>
+
+    </div>
+</section>
+
+<p id="copyright" center class="footer"> Loading date... </p>
+<br>
+
+<script>
+    document.getElementById("copyright").innerHTML = "<a class=\"footer-link footer\" href=\"/\">© " + new Date().getFullYear() + " The Tempest's Box</a>";
+</script>
+
+    </footer>
+    <br>
+
+    <script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script>
+    <script>
+        anchors.options.icon = '#';
+        anchors.options.visible = 'touch';
+        anchors.options.placement = 'left';
+        anchors.add('h2:not([title]), h3:not(.two-grid), h4:not(.two-grid):not(.subtitle), h5:not(.two-grid), h6');
+
+        // anchors.options.icon = '';
+        // anchors.options.visible = 'hover';
+        // anchors.add('hr.createanchor');
+    </script>
+
+    <button id="go-to-top" title="Go to Top" onclick="topFunction()" onmouseover="topHover()" onmouseout="topHover()"><i class="fas fa-chevron-up"></i></button>
+<script src="/assets/js/goToTop.js"></script>
+
+    <!-- <script src="/assets/js/dynamicNavbar.js"></script> -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+                document.querySelectorAll('img').forEach(function (img) {
+                    img.onerror = function () {
+                        this.classList.add("broken");
+                    };
+                })
+            });
+    </script>
+</body>
+
+</html>

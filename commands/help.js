@@ -33,6 +33,10 @@ module.exports = {
                 .setColor("0x9b9b9b")
                 .setTimestamp()
                 .setFooter("Aliases: " + command.aliases);
+            if (command.help_extras != undefined)
+                embed.setDescription(
+                    embed.description + "\n\n" + command.help_extras
+                );
 
             if (command.usage != undefined)
                 embed.setDescription(
