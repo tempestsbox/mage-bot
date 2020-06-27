@@ -272,11 +272,11 @@ client.on("messageReactionAdd", async (reaction, user) => {
 });
 
 // event :: on member join
-client.on("guildMemberAdd", (member) => {
-    member.roles.add(
-        member.guild.roles.cache.find((role) => role.id === config.join_role)
-    );
-});
+// client.on("guildMemberAdd", (member) => {
+//     member.roles.add(
+//         member.guild.roles.cache.find((role) => role.id === config.join_role)
+//     );
+// });
 
 module.exports = {
     client: client
