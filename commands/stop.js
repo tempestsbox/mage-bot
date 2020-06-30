@@ -1,9 +1,10 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
-client.login(process.env.TOKEN);
-
 const config = require("../config.json");
+const secrets = require("../secrets.json");
+
+client.login(secrets.token);
 
 module.exports = {
     aliases: ["stop", "restart"],

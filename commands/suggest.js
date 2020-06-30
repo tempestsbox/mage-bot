@@ -2,6 +2,9 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("../config.json");
+const secrets = require("../secrets.json");
+
+client.login(secrets.token);
 
 module.exports = {
     aliases: ["suggest", "sug", "s"],
@@ -54,5 +57,3 @@ module.exports = {
         }
     },
 };
-
-client.login(process.env.TOKEN);

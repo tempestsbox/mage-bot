@@ -1,18 +1,22 @@
 {
-  "name": "ttb_bot",
+  "name": "mage-bot",
   "version": "1.0.0",
-  "description": "Casts a spell of awesomeness on your server!",
+  "description": "",
   "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node bot.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tempestsbox/mage-bot.git"
   },
   "author": "Andante",
-  "license": "ISC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tempestsbox/mage-bot/issues"
+  },
+  "homepage": "https://github.com/tempestsbox/mage-bot#readme",
   "dependencies": {
-    "discord.js": "^12.2.0",
-    "express": "^4.17.1",
-    "express-glitch-keepalive": "^0.2.0",
-    "node": "^14.4.0"
+    "discord.js": "^12.2.0"
   }
 }

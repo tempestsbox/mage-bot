@@ -8,6 +8,7 @@ const client = new Discord.Client({
 client.commands = new Discord.Collection();
 
 const config = require("./config.json");
+const secrets = require("./secrets.json");
 const package = require("./package.json");
 
 const commandFiles = fs
@@ -23,7 +24,7 @@ for (const file of commandFiles) {
 var lastChainStoryMessage;
 
 console.log("Loading...");
-client.login(process.env.TOKEN);
+client.login(secrets.token);
 
 // event :: on load
 client.on("ready", () => {
@@ -38,8 +39,6 @@ client.on("ready", () => {
     preload();
 
     setTimeout(load, 2000);
-
-    keepAlive();
 });
 function preload() {
     client.user.setActivity("🟡").then(() => {
@@ -61,18 +60,6 @@ function load() {
             })
             .catch((_error) => load());
     });
-}
-function keepAlive() {
-    const http = require("http");
-    const express = require("express");
-    const app = express();
-    app.get("/", (request, response) => {
-        process.exit();
-    });
-    app.listen(process.env.PORT);
-    setInterval(() => {
-        http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
-    }, 280000);
 }
 
 // event :: on message
