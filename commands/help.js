@@ -32,7 +32,7 @@ module.exports = {
                 .setDescription(command.description)
                 .setColor("0x9b9b9b")
                 .setTimestamp()
-                .setFooter("Aliases: " + command.aliases);
+                .setFooter("Aliases: " + command.aliases.join(", "));
             if (command.help_extras != undefined)
                 embed.setDescription(
                     embed.description + "\n\n" + command.help_extras

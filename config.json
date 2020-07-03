@@ -5,7 +5,7 @@
     "suggestions_channel": "705882295961387160",
     "join_role": "598345590362865675",
 
-    "postMessagesToLog": false,
+    "postMessagesToLog": true,
 
     "description": "The Tempest's Box adds countless features that add to the game, providing you with many new items, blocks, entities, and more!",
     "activity": "TTB v0.8.0+a",

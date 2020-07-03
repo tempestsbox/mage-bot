@@ -86,7 +86,7 @@ client.on("message", async (message) => {
 
     // post message to log if not command
     const isCommand = client.commands.has(command);
-    if (!isCommand && config.postMessagesToLog)
+    if (!isCommand && config.postMessagesToLog) {
         console.log(
             "[#" +
             message.channel.name +
@@ -95,6 +95,8 @@ client.on("message", async (message) => {
             ": " +
             message.content
         );
+        if (message.attachments.size > 0) console.log("^ has attachments");
+    }
 
     // if not command, return
     if (!message.content.startsWith(config.prefix)) return;
@@ -171,22 +173,22 @@ client.on("messageReactionAdd", async (reaction, user) => {
 
     if (!message.member.hasPermission("MANAGE_CHANNELS")) return;
 
-    if ((message.channel.id = config.suggestions_channel)) {
-        if (!(reaction.emoji.name == "👍" || reaction.emoji.name == "👎"))
-            message.reactions.cache
-                .get(reaction.emoji.name)
-                .remove()
-                .catch((error) =>
-                    console.error("Failed to remove reactions: ", error)
-                );
+    if (message.channel.id = config.suggestions_channel) {
+        if (!(reaction.emoji.name == "👍" || reaction.emoji.name == "👎")) {
+            reaction = message.reactions.cache.get(reaction.emoji.name);
+            if (reaction != null && reaction != undefined)
+                reaction.remove()
+                        .catch((error) =>
+                            console.error("Failed to remove reactions: ", error)
+                        );
+        }
 
         const previousEmbed = message.embeds[0];
-        const previousHasSpoiler =
-            previousEmbed.description.startsWith("||") &&
-            previousEmbed.description.endsWith("||");
+        var previousHasSpoiler = false;
+        if (previousEmbed != undefined) previousHasSpoiler = previousEmbed.description.startsWith("||") && previousEmbed.description.endsWith("||");
 
         // global remove spoiler
-        if (reaction.emoji.name == "▫️" && previousHasSpoiler) {
+        if (reaction && reaction.emoji.name == "▫️" && previousHasSpoiler) {
             message.edit(
                 message.content,
                 previousEmbed.setDescription(
@@ -201,7 +203,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
         var found = false;
         for (markType of markTypes) {
             for (acceptedEmoji of markType[0]) {
-                if (reaction.emoji.name == acceptedEmoji) {
+                if (reaction && reaction.emoji.name == acceptedEmoji) {
                     found = true;
                     break;
                 }
