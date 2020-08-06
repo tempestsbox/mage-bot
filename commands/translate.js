@@ -7,7 +7,7 @@ module.exports = {
     execute(message, args) {
         const logo = "https://thetempestsbox.com/assets/logo.png";
         const embed = new Discord.MessageEmbed()
-          .setAuthor('The Tempest\'s Box Trello', logo)
+          .setAuthor('The Tempest\'s Box Translations', logo)
           .setColor("#FFB6C1")
           .setDescription('https://trello.com/b/lsQB6Bue')
           .setThumbnail(logo)

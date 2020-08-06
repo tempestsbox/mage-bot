@@ -33,9 +33,7 @@ module.exports = {
                 "<:github:706241347404955770> [GitHub](https://github.com/" +
                 config.github +
                 ")\n" +
-                "<:youtube:706244121173426367> [YouTube](https://youtube.com/" +
-                config.youtube +
-                ")\n" +
+                "<:youtube:706244121173426367> [YouTube](https://youtube.thetempestsbox.com)\n" +
                 ":link: [Site](" +
                 config.site +
                 ")"

@@ -15,6 +15,6 @@ module.exports = {
         .toLowerCase();
       
       message.delete();
-      message.channel.send("https://tempestsbox.github.io/faq#" + output);
+      message.channel.send("https://thetempestsbox.com/faq#" + output);
     },
 };

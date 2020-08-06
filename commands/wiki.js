@@ -1,21 +1,10 @@
 /* eslint-disable no-unused-vars */
+const config = require('../config.json');
+
 module.exports = {
-    aliases: ['wiki', 'w'],
-    description: 'Grab a wiki link',
-    usage: '[wiki page]',
+    aliases: ['translate', 'tl'],
+    description: 'Help us to translate TTB!',
     execute(message, args) {
-      var wikiUrl = "https://tempestsbox.github.io/wiki";
-
-      if (args.length != 0) {
-        var output = [];
-        
-        args.forEach(async (arg) => {
-          await output.push(arg.charAt(0).toUpperCase() + arg.slice(1));
-        });
-
-        wikiUrl = wikiUrl + "/" + output.join("_");
-      }
-        
-      message.channel.send(wikiUrl);
+        message.channel.send('http://translate.thetempestsbox.com');
     },
 };

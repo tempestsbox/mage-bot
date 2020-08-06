@@ -4,7 +4,7 @@ const config = require("../config.json");
 const Discord = require("discord.js");
 
 module.exports = {
-  aliases: ["version", "ver", "v", "d", "download"],
+  aliases: ["download", "version", "d", "ver", "v"],
   description: "Fetches the latest version of TTB from GitHub",
   async execute(message, args) {
     const repo = config.github;
@@ -39,7 +39,7 @@ module.exports = {
             .setDescription(
               '[Download URL](' + github + ')'
               + ' | ' +
-              '[Article](https://tempestsbox.github.io/article/release-' + archive + ')'
+              '[Article](https://thetempestsbox.com/article/release-' + archive + ')'
             );
       replyMessage.delete();
       message.channel.send(embed);
